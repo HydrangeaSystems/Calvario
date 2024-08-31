@@ -10,3 +10,7 @@ It can be used as frequency mixer, distortion, waveshaper, frequency modulator, 
 ## Release
 Currently released for Windows only, for VCV Rack 2.
 Install the plugin extracting it from the zip and copying it into your VCV rack plugins folder (usually in Appdata/Local/Rack2)
+
+
+## Demo
+Check out ![this demo on youtube](https://www.youtube.com/watch?v=gVLwDprJd58). 
