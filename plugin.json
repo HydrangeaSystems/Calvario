@@ -1,0 +1,23 @@
+{
+  "slug": "Calvario",
+  "name": "Calvario",
+  "version": "2.0.0",
+  "license": "GPL-3.0",
+  "brand": "Calvario",
+  "author": "Meru",
+  "authorEmail": "merutochan@gmail.com",
+  "authorUrl": "https://github.com/merumerutho/",
+  "pluginUrl": "https://github.com/merumerutho/Calvario",
+  "manualUrl": "",
+  "sourceUrl": "https://github.com/merumerutho/Calvario",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": [
+    {
+      "slug": "Calvario",
+      "name": "Calvario",
+      "description": "Bitwise signal cross-modulator.",
+      "tags": ["Distortion", "Effect"]
+    }
+  ]
+}
