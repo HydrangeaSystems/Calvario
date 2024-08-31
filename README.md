@@ -13,4 +13,4 @@ Install the plugin extracting it from the zip and copying it into your VCV rack 
 
 
 ## Demo
-Check out ![this demo on youtube](https://www.youtube.com/watch?v=gVLwDprJd58). 
+Check out [this demo on youtube](https://www.youtube.com/watch?v=gVLwDprJd58). 
