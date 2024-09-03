@@ -46,8 +46,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="6.922145"
-     inkscape:cx="13.72407"
-     inkscape:cy="126.98376"
+     inkscape:cx="13.796302"
+     inkscape:cy="298.17347"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -100,35 +100,35 @@
        ry="2.7003806"
        transform="scale(-1,1)" />
     <rect
-       style="fill:#cccccc;stroke-width:0.200512"
+       style="fill:#cccccc;stroke-width:0.204331"
        id="rect1-3"
        width="8.1599998"
-       height="26"
+       height="27"
        x="-9.1599998"
-       y="246.49998"
-       ry="2.5259628"
+       y="245.49998"
+       ry="2.6231151"
        transform="scale(-1,1)" />
     <rect
-       style="fill:#800000;stroke-width:0.214929"
+       style="fill:#800000;stroke-width:0.177633"
        id="rect4"
-       width="3.6600001"
+       width="2.5"
        height="15"
-       x="3.25"
-       y="273.49997"
+       x="3.8499999"
+       y="274.49997"
        ry="3.4893043"
        rx="0" />
     <path
-       d="m 5.0797933,285.52918 a 1,1 0 0 0 -0.999939,0.99994 1,1 0 0 0 0.999939,0.99994 1,1 0 0 0 1.0004557,-0.99994 1,1 0 0 0 -1.0004557,-0.99994 z"
-       style="fill:#ffffff;stroke-width:0.264583"
+       d="m 5.0798063,285.77898 a 0.74985202,0.75004452 0 0 0 -0.7498063,0.75 0.74985202,0.75004452 0 0 0 0.7498063,0.75 0.74985202,0.75004452 0 0 0 0.7501937,-0.75 0.74985202,0.75004452 0 0 0 -0.7501937,-0.75 z"
+       style="fill:#ffffff;stroke-width:0.198424"
        id="path4" />
     <rect
-       style="fill:#800000;stroke-width:0.344605"
+       style="fill:#800000;stroke-width:0.269842"
        id="rect5"
        width="8.1599998"
-       height="3.2617664"
+       height="2"
        x="1"
-       y="281.76749"
-       ry="1.6308832"
+       y="283.49997"
+       ry="1"
        rx="0" />
     <rect
        style="fill:#800000;stroke:#000000;stroke-width:0.207229;stroke-opacity:1"

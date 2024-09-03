@@ -21,6 +21,7 @@ struct Calvario : Module {
 		SIGNAL_INPUT_IN2,
 		SIGNAL_GAIN_MOD_IN1,
 		SIGNAL_GAIN_MOD_IN2,
+        SIGNAL_MIX_MOD_OUT,
 		INPUTS_LEN
 	};
 	enum OutputId {
@@ -40,6 +41,7 @@ struct Calvario : Module {
 
 		configInput(SIGNAL_GAIN_MOD_IN1, "CV Gain - Input1");
 		configInput(SIGNAL_GAIN_MOD_IN2, "CV Gain - Input2");
+        configInput(SIGNAL_MIX_MOD_OUT, "CV Mix - Output");
 
 		configInput(SIGNAL_INPUT_IN1, "Signal - Input1");
 		configInput(SIGNAL_INPUT_IN2, "Signal - Input2");
@@ -53,7 +55,8 @@ struct Calvario : Module {
 		// Input gain is ((Knob + normalized CV) * mode_gain)
 		float gain1 = (params[PARAM_GAIN_IN1].getValue() + NORMALIZE_10VPP(math::clamp(inputs[SIGNAL_GAIN_MOD_IN1].getVoltage(), -5.f, 5.f))) * 0.2f;
 		float gain2 = (params[PARAM_GAIN_IN2].getValue() + NORMALIZE_10VPP(math::clamp(inputs[SIGNAL_GAIN_MOD_IN2].getVoltage(), -5.f, 5.f))) * 0.2f;
-		
+		float cv_mix = NORMALIZE_10VPP(math::clamp(inputs[SIGNAL_MIX_MOD_OUT].getVoltage()));
+        
 		// Input signals
 		float in_signal1 = inputs[SIGNAL_INPUT_IN1].getVoltage();
 		float in_signal2 = inputs[SIGNAL_INPUT_IN2].getVoltage();
@@ -82,7 +85,7 @@ struct Calvario : Module {
         float xor_toOut = ((float)xor_result * _5_OVER_MAX_INT32);
 		
         // Mix (IN1 + XOR) 
-		float mix = params[PARAM_MIX_OUT].getValue();
+		float mix = math::clamp(params[PARAM_MIX_OUT].getValue() + cv_mix, 0.f, 1.f);
         float output = (dry_signal1*(1.0f - mix) + xor_toOut*mix);
 		
 		// Apply Limiter @0dB (10 Vpp)
@@ -119,11 +122,12 @@ struct CalvarioWidget : ModuleWidget {
 		addParam(createParamCentered<CKSS>(mm2px(Vec(_HP, 71)), module, Calvario::GAIN_SWITCH));
 
 		// Output Signal
-		addParam(createParamCentered<Trimpot>(mm2px(Vec(_HP, 85)), module, Calvario::PARAM_MIX_OUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(_HP, 95)), module, Calvario::SIGNAL_OUTPUT));
+		addParam(createParamCentered<Trimpot>(mm2px(Vec(_HP, 81)), module, Calvario::PARAM_MIX_OUT));
+        addInput(createInputCentered<PJ301MPort>(mm2px(Vec(_HP, 88)), module, Calvario::SIGNAL_MIX_MOD_OUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(_HP, 98)), module, Calvario::SIGNAL_OUTPUT));
 		
 		// LED
-		addChild(createLightCentered<TinyLight<RedLight>>(mm2px(Vec(_HP, .9*_3U+2.4)), module, Calvario::BLINK_LIGHT));
+		addChild(createLightCentered<SmallLight<WhiteLight>>(mm2px(Vec(_HP, .9*_3U+2.4)), module, Calvario::BLINK_LIGHT));
 	}
 };
 
