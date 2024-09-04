@@ -3,8 +3,8 @@
   "name": "Calvario",
   "version": "2.3.0",
   "license": "GPL-3.0",
-  "brand": "Calvario",
-  "author": "Meru",
+  "brand": "HydrangeaSystems",
+  "author": "merumerutho",
   "authorEmail": "merutochan@gmail.com",
   "authorUrl": "https://github.com/merumerutho/",
   "pluginUrl": "https://github.com/merumerutho/Calvario",
@@ -16,8 +16,8 @@
     {
       "slug": "Calvario",
       "name": "Calvario",
-      "description": "Bitwise signal cross-modulator.",
-      "tags": ["Distortion", "Effect"]
+      "description": "Small and brutal signal cross-modulator.",
+      "tags": ["Distortion", "Effect", "Ring modulator", "Waveshaper"]
     }
   ]
 }

@@ -10,7 +10,7 @@
 
 struct Calvario : Module {
 	enum ParamId {
-		GAIN_SWITCH,
+		PARAM_MODE_SWITCH,
 		PARAM_GAIN_IN1,
 		PARAM_GAIN_IN2,
 		PARAM_MIX_OUT,
@@ -47,7 +47,7 @@ struct Calvario : Module {
 		configInput(SIGNAL_INPUT_IN2, "Signal - Input2");
 		configOutput(SIGNAL_OUTPUT, "Signal - Output");
 
-		configSwitch(GAIN_SWITCH, 0.f, 1.f, 0.f, "Mode", {"Light", "Heavy"});
+		configSwitch(PARAM_MODE_SWITCH, 0.f, 1.f, 0.f, "Mode", {"Soft", "Hard"});
 	}
 
 	void process(const ProcessArgs& args) override {
@@ -79,7 +79,7 @@ struct Calvario : Module {
         // Apply XOR
         int xor_result = (in1_toXor ^ in2_toXor);
         // Bitshift for extra crispiness
-        xor_result <<= (int(params[GAIN_SWITCH].getValue() * 2) + 2);
+        xor_result <<= (int(params[PARAM_MODE_SWITCH].getValue() * 2) + 2);
 
         // Convert to float and output gain staging
         float xor_toOut = ((float)xor_result * _5_OVER_MAX_INT32);
@@ -108,20 +108,20 @@ struct CalvarioWidget : ModuleWidget {
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 		//addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		// Input Signal 1
+		// Input 1 Group
 		addParam(createParamCentered<Trimpot>(mm2px(Vec(_HP, 11)), module, Calvario::PARAM_GAIN_IN1));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(_HP, 19)), module, Calvario::SIGNAL_GAIN_MOD_IN1));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(_HP, 29)), module, Calvario::SIGNAL_INPUT_IN1));
 		
-		// Input Signal 2
+		// Input 2 Group
 		addParam(createParamCentered<Trimpot>(mm2px(Vec(_HP, 41)), module, Calvario::PARAM_GAIN_IN2));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(_HP, 49)), module, Calvario::SIGNAL_GAIN_MOD_IN2));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(_HP, 59)), module, Calvario::SIGNAL_INPUT_IN2));
 		
 		// Mode Switch
-		addParam(createParamCentered<CKSS>(mm2px(Vec(_HP, 71)), module, Calvario::GAIN_SWITCH));
+		addParam(createParamCentered<CKSS>(mm2px(Vec(_HP, 71)), module, Calvario::PARAM_MODE_SWITCH));
 
-		// Output Signal
+		// Output Group
 		addParam(createParamCentered<Trimpot>(mm2px(Vec(_HP, 81)), module, Calvario::PARAM_MIX_OUT));
         addInput(createInputCentered<PJ301MPort>(mm2px(Vec(_HP, 88)), module, Calvario::SIGNAL_MIX_MOD_OUT));
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(_HP, 98)), module, Calvario::SIGNAL_OUTPUT));
