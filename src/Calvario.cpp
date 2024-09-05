@@ -2,11 +2,11 @@
 #include <string>
 
 #define MAX_INT32 0x7FFFFFFF
-#define _5_OVER_MAX_INT32 2.32830643762289846205e-9
+#define _5_OVER_MAX_INT32 2.32830643762289846205e-9f
 #define NORMALIZE_10VPP(x) (x*0.2f)
 
-#define _HP 5.08
-#define _3U 128.5
+#define _HP 5.08f
+#define _3U 128.5f
 
 struct Calvario : Module {
 	enum ParamId {
