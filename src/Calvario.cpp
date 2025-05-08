@@ -1,8 +1,9 @@
 #include "plugin.hpp"
 #include <string>
+#include <limits>
 
-#define MAX_INT32 0x7FFFFFFF
-#define _5_OVER_MAX_INT32 2.32830643762289846205e-9f
+#define MIN_Q31 (1.f / MAX_INT) 
+// Macro below assumes signal between [-5V; 5V], scales it to [-1V; 1V]
 #define NORMALIZE_10VPP(x) (x*0.2f)
 
 #define _HP 5.08f
@@ -73,27 +74,27 @@ struct Calvario : Module {
 		in_signal2 *= gain2;
 
 	    // Convert to int
-	    int in1_toXor = (int) ((MAX_INT32) * in_signal1);
-        int in2_toXor = (int) ((MAX_INT32) * in_signal2);
+	    int in1_Q31 = (int) ((INT_MAX) * in_signal1);
+        int in2_Q31 = (int) ((INT_MAX) * in_signal2);
 
         // Apply XOR
-        int xor_result = (in1_toXor ^ in2_toXor);
-        // Bitshift for extra crispiness
+        int xor_result = (in1_Q31 ^ in2_Q31);
+        // Optional bitshift for extra crispiness
         xor_result <<= (int(params[PARAM_MODE_SWITCH].getValue() * 2) + 2);
 
         // Convert to float and output gain staging
-        float xor_toOut = ((float)xor_result * _5_OVER_MAX_INT32);
+        float xor_float = ((float)xor_result * 5.f * MIN_Q31);
 		
         // Mix (IN1 + XOR) 
 		float mix = math::clamp(params[PARAM_MIX_OUT].getValue() + cv_mix, 0.f, 1.f);
-        float output = (dry_signal1*(1.0f - mix) + xor_toOut*mix);
+        float output = (dry_signal1 * (1.0f - mix) + xor_float * mix);
 		
 		// Apply Limiter @0dB (10 Vpp)
 		output = math::clamp(output, -5.f, 5.f);
         outputs[SIGNAL_OUTPUT].setVoltage(output);
 
         // Blink light
-        lights[BLINK_LIGHT].setBrightness(abs(output / 5.f));
+        lights[BLINK_LIGHT].setBrightness(abs(output * .2f));
 	}
 };
 
